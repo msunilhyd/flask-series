@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, make_response
+from flask import Flask, jsonify, request, make_response, json
 from flaskext.mysql import MySQL
 from flask_cors import CORS
 
@@ -13,14 +13,32 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 mysql = MySQL(app)
 CORS(app)
 
+
 @app.route('/api/tasks', methods=['GET'])
 def get_all_tasks():
     cur = mysql.get_db().cursor()
     cur.execute("SELECT * FROM db_tasks.tasks")
     rv = cur.fetchall()
     print('rv is : {}'.format(rv))
-    print('hello jsonify(rv) is : {}'.format(make_response(jsonify(rv))))
-    return jsonify(rv)
+    print('hello make_reponse(jsonify(rv)) is : {}'.format(jsonify(rv)))
+    # return jsonify(rv)
+    print('rv.len is : {}'.format(len(rv)))
+    empList = []
+    for emp in rv:
+        print('emp[1] is : {}'.format(emp[1]))
+        empDict = {
+        'id': emp[0],
+        'title' : emp[1]
+        }
+        empList.append(empDict)
+
+    response = app.response_class(
+        response=json.dumps(empList),
+        status=200,
+        mimetype='application/json'
+    )
+    print('response is : {}'.format(response))
+    return response
 
 
 @app.route('/api/task', methods=['POST'])
