@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, make_response
 from flaskext.mysql import MySQL
 from flask_cors import CORS
 
@@ -18,6 +18,8 @@ def get_all_tasks():
     cur = mysql.get_db().cursor()
     cur.execute("SELECT * FROM db_tasks.tasks")
     rv = cur.fetchall()
+    print('rv is : {}'.format(rv))
+    print('hello jsonify(rv) is : {}'.format(make_response(jsonify(rv))))
     return jsonify(rv)
 
 
@@ -29,6 +31,7 @@ def add_task():
     cur.execute("INSERT INTO db_tasks.tasks (title) VALUES ('" + str(title)+ "')")
     mysql.get_db().commit()
     result = {'title':title}
+    print('result is : {}'.format(result))
 
     return jsonify({"result": result})
 
