@@ -78,46 +78,17 @@ class List extends Component {
     }
 
     render () {
+        
         return (
             <div className="col-md-12">
-                <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="input1">Task Name</label>
-                        <div className="row">
-                            <div className="col-md-9">
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="input1"
-                                    value={this.state.term || ''}
-                                    onChange={this.onChange.bind(this)}
-                                />
-                            </div>
-                            <div className="col-md-2">
-                                <button className="btn btn-primary"
-                                    onClick={this.onUpdate.bind(this)}>
-                                    Update
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <button className="btn btn-success btn-block"
-                        type="submit"
-                        onClick={this.onSubmit.bind(this)}>
-                        Submit
-                    </button>
-                </form>
                 <table className="table">
                     <tbody>
                         {this.state.items.map((item, index) => (
                             <tr key={index}>
                                 <td className="text-left">{item[0]}</td>
                                 <td className="text-right">
-                                    <button className="btn btn-info mr-1"
-                                        disabled={this.state.editDisabled}
-                                        onClick={this.onEdit.bind(this, item[0], item[1])}>
-                                        Edit
-                                    </button>
+                                    <iframe width="853" height="480" src={item[0]} 
+                                    frameborder="0" allowfullscreen ng-show="showvideo"></iframe>
 
                                     <button className="btn btn-danger"
                                         disabled={this.state.editDisabled}
