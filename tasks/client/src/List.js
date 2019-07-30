@@ -87,8 +87,8 @@ class List extends Component {
                             <tr key={index}>
                                 <td className="text-left">{item[0]}</td>
                                 <td className="text-right">
-                                    <iframe width="853" height="480" src={item[0]} 
-                                    frameborder="0" allowfullscreen ng-show="showvideo"></iframe>
+                                    <iframe width="500" height="300" src={item[0]} 
+                                    frameBorder="0" allowFullScreen ng-show="showvideo" allow='autoplay'></iframe>
 
                                     <button className="btn btn-danger"
                                         disabled={this.state.editDisabled}
